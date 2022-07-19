@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/likelyBlack"
+        android:gravity="end|bottom"
+        android:padding="10dp"
+        android:text="@string/calc_text"
+        android:textSize="48sp"
+        android:textColor="@color/white"/>
+
+    <LinearLayout
+        style="@style/buttonRow">
+        <Button
+            android:id="@+id/btnClear"
+            style="@style/operatorBtnStyle"
+            android:text="@string/AC"
+            />
+
+
+        <Button
+            android:id="@+id/btnDelete"
+            style="@style/operatorBtnStyle"
+            android:text="@string/backSpace"
+            />
+
+        <Button
+            android:id="@+id/btnPercent"
+            style="@style/operatorBtnStyle"
+            android:text="@string/percent"
+            />
+
+        <Button
+            android:id="@+id/btnDivide"
+            style="@style/operatorBtnStyle"
+            android:text="@string/divide" />
+
+    </LinearLayout>
+    <LinearLayout
+        style="@style/buttonRow">
+        <Button
+            android:id="@+id/btn7"
+            style="@style/numberBtnStyle"
+            android:text="@string/seven"
+            />
+
+        <Button
+            android:id="@+id/btn8"
+            style="@style/numberBtnStyle"
+            android:text="@string/eight"/>
+
+        <Button
+            android:id="@+id/btn9"
+            style="@style/numberBtnStyle"
+            android:text="@string/nine"
+            />
+
+        <Button
+            android:id="@+id/btnMultiply"
+            style="@style/operatorBtnStyle"
+            android:text="@string/multiply"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        style="@style/buttonRow">
+        <Button
+            android:id="@+id/btn4"
+            style="@style/numberBtnStyle"
+            android:text="@string/four" />
+
+        <Button
+            android:id="@+id/btn5"
+            style="@style/numberBtnStyle"
+            android:text="@string/five"
+            />
+
+        <Button
+            android:id="@+id/btn6"
+            style="@style/numberBtnStyle"
+            android:text="@string/six"
+            />
+
+        <Button
+            android:id="@+id/btnMinus"
+            style="@style/operatorBtnStyle"
+            android:text="@string/minus"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <Button
+            android:id="@+id/btn1"
+            style="@style/numberBtnStyle"
+            android:text="@string/one"
+            />
+
+        <Button
+            android:id="@+id/btn2"
+            style="@style/numberBtnStyle"
+            android:text="@string/two"
+            />
+
+        <Button
+            android:id="@+id/btn3"
+            style="@style/numberBtnStyle"
+            android:text="@string/three"
+            />
+
+        <Button
+            android:id="@+id/btnPlus"
+            style="@style/operatorBtnStyle"
+            android:text="@string/plus"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <Button
+            android:id="@+id/btnZero"
+            style="@style/numberBtnStyle"
+            android:layout_weight="2"
+            android:text="@string/zero" />
+
+        <Button
+            android:id="@+id/btnDot"
+            style="@style/numberBtnStyle"
+            android:text="@string/dot"
+            />
+
+        <Button
+            android:id="@+id/btnEquals"
+            style="@style/operatorBtnStyle"
+            android:text="@string/equals"
+        />
+
+    </LinearLayout>
+
+</LinearLayout>
