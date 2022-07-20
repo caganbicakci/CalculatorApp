@@ -88,16 +88,23 @@ class MainActivity : AppCompatActivity() {
             }
 
             when (currentOperatorBtn?.text) {
-                "+" -> resultTextView?.text = (tempResult?.plus(current)).toString()
-                "-" -> resultTextView?.text = (tempResult?.minus(current)).toString()
+                "+" -> {
+                    resultTextView?.text = (tempResult?.plus(current)).toString()
+                    removeDotBeforeZero()
+                }
+                "-" -> {
+                    resultTextView?.text = (tempResult?.minus(current)).toString()
+                    removeDotBeforeZero()
+                }
                 "*" -> {
                     val result1 = tempResult
                     val result2 = resultTextView?.text.toString().toDouble()
 
                     if (result1 != null) {
                         resultTextView?.text = (result1 * result2).toString()
+                        removeDotBeforeZero()
                     } else {
-                        resultTextView?.text = "0.0"
+                        resultTextView?.text = "0"
                     }
                 }
                 "/" -> {
@@ -106,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "Can not divide by zero!", Toast.LENGTH_SHORT).show()
                     } else {
                         resultTextView?.text = (tempResult?.div(current)).toString()
+                        removeDotBeforeZero()
                     }
                 }
 
@@ -146,5 +154,12 @@ class MainActivity : AppCompatActivity() {
             )
         )
     }
+
+    private fun removeDotBeforeZero(){
+        if(resultTextView!!.text.contains(".0")){
+            resultTextView?.text = resultTextView!!.text.substring(0, resultTextView!!.text.length - 2)
+        }
+    }
+
 
 }
