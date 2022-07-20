@@ -2,6 +2,7 @@ package com.example.calculatorapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -41,10 +42,10 @@ class MainActivity : AppCompatActivity() {
             "AC" -> clearResult()
             "DEL" -> deleteLastInput()
             "-" -> subtractOperation()
-            "+" -> additionOperation()
+            "+" -> getOperation(findViewById(R.id.btnPlus))
             "=" -> equalsOperation()
-            "*" -> multiplyOperation()
-            "/" -> divideOperation()
+            "*" -> getOperation(findViewById(R.id.btnMultiply))
+            "/" -> getOperation(findViewById(R.id.btnDivide))
         }
     }
 
@@ -76,82 +77,65 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun additionOperation() {
-        tempResult = resultTextView?.text.toString().toDouble()
-        resultTextView?.text = ""
-
-        currentOperatorBtn = findViewById(R.id.btnPlus)
-        currentOperatorBtn!!.setBackgroundColor(
-            ContextCompat.getColor(
-                applicationContext,
-                R.color.orangeGrey
-            )
-        )
-    }
 
     private fun equalsOperation() {
 
-        val current: Double = if (!resultTextView?.text.isNullOrEmpty()) {
-            resultTextView?.text.toString().toDouble()
-        } else {
-            0.0
-        }
-
-        when (currentOperatorBtn?.text) {
-            "+" -> resultTextView?.text = (tempResult?.plus(current)).toString()
-            "-" -> resultTextView?.text = (tempResult?.minus(current)).toString()
-            "*" -> {
-                val result1 = tempResult
-                val result2 = resultTextView?.text.toString().toDouble()
-
-                if (result1 != null) {
-                    resultTextView?.text = (result1 * result2).toString()
-                } else {
-                    resultTextView?.text = "0.0"
-                }
-            }
-            "/" -> {
-                if (current == 0.0 || current.isNaN()) {
-                    resultTextView?.text = ""
-                    Toast.makeText(this, "Can not divide by zero!", Toast.LENGTH_SHORT).show()
-                } else {
-                    resultTextView?.text = (tempResult?.div(current)).toString()
-                }
-
+        try {
+            val current: Double = if (!resultTextView?.text.isNullOrEmpty()) {
+                resultTextView?.text.toString().toDouble()
+            } else {
+                0.0
             }
 
+            when (currentOperatorBtn?.text) {
+                "+" -> resultTextView?.text = (tempResult?.plus(current)).toString()
+                "-" -> resultTextView?.text = (tempResult?.minus(current)).toString()
+                "*" -> {
+                    val result1 = tempResult
+                    val result2 = resultTextView?.text.toString().toDouble()
+
+                    if (result1 != null) {
+                        resultTextView?.text = (result1 * result2).toString()
+                    } else {
+                        resultTextView?.text = "0.0"
+                    }
+                }
+                "/" -> {
+                    if (current == 0.0 || current.isNaN()) {
+                        resultTextView?.text = ""
+                        Toast.makeText(this, "Can not divide by zero!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        resultTextView?.text = (tempResult?.div(current)).toString()
+                    }
+                }
+
+            }
+        }catch (e: Exception){
+            Log.e("EXCEPTION ON EQUALS", "$e", )
         }
+
         resetOperatorButton()
     }
 
-    private fun multiplyOperation() {
+    private fun getOperation(button: Button) {
+        try {
+            if (!resultTextView?.text.isNullOrEmpty()) {
+                tempResult = resultTextView?.text.toString().toDouble()
+            }
+            resultTextView?.text = ""
 
-        if (!resultTextView?.text.isNullOrEmpty()) {
-            tempResult = resultTextView?.text.toString().toDouble()
+            currentOperatorBtn = button
+            currentOperatorBtn?.setBackgroundColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.orangeGrey
+                )
+            )
+        }catch (e: Exception){
+            Log.e("EXCEPTION ON OPERATION", "$e", )
         }
 
-        resultTextView?.text = ""
 
-        currentOperatorBtn = findViewById(R.id.btnMultiply)
-        currentOperatorBtn?.setBackgroundColor(
-            ContextCompat.getColor(
-                applicationContext,
-                R.color.orangeGrey
-            )
-        )
-    }
-
-    private fun divideOperation() {
-        tempResult = resultTextView?.text.toString().toDouble()
-        resultTextView?.text = ""
-
-        currentOperatorBtn = findViewById(R.id.btnDivide)
-        currentOperatorBtn?.setBackgroundColor(
-            ContextCompat.getColor(
-                applicationContext,
-                R.color.orangeGrey
-            )
-        )
     }
 
     private fun resetOperatorButton() {
