@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             "=" -> equalsOperation()
             "*" -> getOperation(findViewById(R.id.btnMultiply))
             "/" -> getOperation(findViewById(R.id.btnDivide))
+            "%" -> getOperation(findViewById(R.id.btnPercent))
         }
     }
 
@@ -97,15 +98,8 @@ class MainActivity : AppCompatActivity() {
                     removeDotBeforeZero()
                 }
                 "*" -> {
-                    val result1 = tempResult
-                    val result2 = resultTextView?.text.toString().toDouble()
-
-                    if (result1 != null) {
-                        resultTextView?.text = (result1 * result2).toString()
-                        removeDotBeforeZero()
-                    } else {
-                        resultTextView?.text = "0"
-                    }
+                    resultTextView?.text = (tempResult?.times(current)).toString()
+                    removeDotBeforeZero()
                 }
                 "/" -> {
                     if (current == 0.0 || current.isNaN()) {
@@ -115,6 +109,10 @@ class MainActivity : AppCompatActivity() {
                         resultTextView?.text = (tempResult?.div(current)).toString()
                         removeDotBeforeZero()
                     }
+                }
+                "%" ->{
+                    resultTextView?.text = ((tempResult?.times((current/100)))).toString()
+                    removeDotBeforeZero()
                 }
 
             }
